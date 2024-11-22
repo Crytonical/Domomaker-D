@@ -7,7 +7,7 @@ const makerPage = async (req, res) => {
 };
 
 const makeDomo = async (req, res) => {
-  if (!req.body.name || !req.body.age) {
+  if (!req.body.name || !req.body.age || !req.body.archetype) {
     return res.status(400).json({ error: 'All fields are required!' });
   }
 
@@ -15,12 +15,13 @@ const makeDomo = async (req, res) => {
     name: req.body.name,
     age: req.body.age,
     owner: req.session.account._id,
+    archetype: req.body.archetype,
   };
 
   try {
     const newDomo = new Domo(domoData);
     await newDomo.save();
-    return res.status(201).json({name: newDomo.age, age: newDomo.age});
+    return res.status(201).json({name: newDomo.name, age: newDomo.age, archetype: newDomo.archetype});
   } catch (err) {
     console.log(err);
     if (err.code === 11000) {
@@ -33,7 +34,7 @@ const makeDomo = async (req, res) => {
 const getDomos = async (req, res) => {
   try{
     const query = {owner: req.session.account._id};
-    const docs = await Domo.find(query).select('name age').lean().exec();
+    const docs = await Domo.find(query).select('name age archetype').lean().exec();
 
     return res.json({domos: docs});
   } catch (err){
