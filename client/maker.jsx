@@ -32,7 +32,7 @@ const DomoForm = (props) => {
             <label htmlFor="domoName">Name: </label>
             <input id="domoName" type="test" name="name" placeholder='Domo Name' />
             <label htmlFor="domoAge">Age: </label>
-            <input id="domoAge" type="number" min="0" name="age" />
+            <input id="domoAge" type="number" min="0" name="age" placeholder='Domo Age' />
             <label htmlFor="domoArchetype">Archetype: </label>
             <input id="domoArchetype" type="test" name="archetype" placeholder='Domo Archetype' />
             <input className="makeDomoSubmit" type="submit" value="Make Domo"/>
