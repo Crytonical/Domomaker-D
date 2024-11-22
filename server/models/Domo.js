@@ -30,13 +30,13 @@ const DomoSchema = new mongoose.Schema({
     required: true,
     trim: true,
     set: setArchetype,
-  }
+  },
 });
 
 DomoSchema.statics.toAPI = (doc) => ({
   name: doc.name,
   age: doc.age,
-  archetype: doc.archetype
+  archetype: doc.archetype,
 });
 
 const DomoModel = mongoose.model('Domo', DomoSchema);
