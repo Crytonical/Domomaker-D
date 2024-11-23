@@ -11,6 +11,7 @@ const handleError = (message) => {
      entries in the response JSON object, and will handle them appropriately.
   */
   const sendPost = async (url, data, handler) => {
+    console.log(handler);
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -34,6 +35,34 @@ const handleError = (message) => {
         handler(result);
     }
   };
+  /* Sends post requests to the server using fetch. Will look for various
+     entries in the response JSON object, and will handle them appropriately.
+  */
+  const sendDelete = async (url, data, handler) => {
+    const response = await fetch(url, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    });
+  
+    const result = await response.json();
+    document.getElementById('domoMessage').classList.add('hidden');
+  
+    if(result.redirect) {
+      window.location = result.redirect;
+    }
+  
+    if(result.error) {
+      handleError(result.error);
+    }
+
+    if (handler) {
+      console.log('delete handler');
+        handler(result);
+    }
+  };
 
   const hideError = () => {
     document.getElementById('domoMessage').classList.add('hidden');
@@ -42,5 +71,6 @@ const handleError = (message) => {
   module.exports = {
     handleError,
     sendPost,
+    sendDelete,
     hideError
   }

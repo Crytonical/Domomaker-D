@@ -45,8 +45,22 @@ const getDomos = async (req, res) => {
   }
 };
 
+const deleteDomo = async (req, res) => {
+  console.log('deleting domo domo.js');
+  try {
+    const query = { owner: req.session.account._id };
+    const docs = await Domo.findOneAndDelete(query);
+
+    return res.json({domos: docs});
+  } catch (err) {
+    console.log(err);
+    return res.status(500).json({error: 'Error deleteing domos!'});
+  }
+}
+
 module.exports = {
   makerPage,
   makeDomo,
   getDomos,
+  deleteDomo
 };
