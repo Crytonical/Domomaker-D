@@ -11,7 +11,6 @@ const handleError = (message) => {
      entries in the response JSON object, and will handle them appropriately.
   */
   const sendPost = async (url, data, handler) => {
-    console.log(handler);
     const response = await fetch(url, {
       method: 'POST',
       headers: {
@@ -59,7 +58,6 @@ const handleError = (message) => {
     }
 
     if (handler) {
-      console.log('delete handler');
         handler(result);
     }
   };

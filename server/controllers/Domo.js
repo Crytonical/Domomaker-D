@@ -46,7 +46,6 @@ const getDomos = async (req, res) => {
 };
 
 const deleteDomo = async (req, res) => {
-  console.log('deleting domo domo.js');
   try {
     const query = { owner: req.session.account._id };
     const docs = await Domo.findOneAndDelete(query);
